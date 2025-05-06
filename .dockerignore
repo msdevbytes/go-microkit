@@ -1,0 +1,17 @@
+# Binaries
+*.exe
+*.out
+*.test
+/tmp/
+tmp/
+vendor/
+coverage.out
+
+# Git
+.git
+.gitignore
+
+# Build artifacts
+bin/
+dist/
+
