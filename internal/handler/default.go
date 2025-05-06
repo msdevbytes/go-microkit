@@ -1,6 +1,11 @@
 package handler
 
-import "github.com/gofiber/fiber/v2"
+import (
+	"time"
+
+	"github.com/gofiber/fiber/v2"
+	"github.com/shahbazkrispx/pkgcommon"
+)
 
 type DefaultHandlerStruct struct {
 }
@@ -14,5 +19,5 @@ func (h *DefaultHandlerStruct) Register(router fiber.Router) {
 }
 
 func (h *DefaultHandlerStruct) Default(c *fiber.Ctx) error {
-	return c.SendStatus(fiber.StatusOK)
+	return c.JSON(pkgcommon.ResponseBuilder(true, "Success", time.Now().Format(time.RFC3339), nil))
 }
