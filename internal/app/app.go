@@ -9,6 +9,7 @@ import (
 	"github.com/msdevbytes/go-microkit/internal/db"
 	"github.com/msdevbytes/go-microkit/internal/routes"
 	"github.com/msdevbytes/go-microkit/internal/service"
+	"github.com/msdevbytes/go-microkit/pkg/logger"
 )
 
 func Start() error {
@@ -16,6 +17,7 @@ func Start() error {
 	time.Local = time.UTC
 
 	if err := db.OpenConnection(); err != nil {
+		logger.Danger("Please check mysql server")
 		return err
 	}
 

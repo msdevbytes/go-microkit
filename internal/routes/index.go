@@ -14,7 +14,7 @@ import (
 func Register(app *fiber.App, svc *service.Container) {
 
 	app.Get("/", func(c *fiber.Ctx) error {
-		return c.JSON(pkgcommon.ResponseBuilder(true, "Welcome to Event Service API", time.Now().Format(time.RFC3339), nil))
+		return c.JSON(pkgcommon.ResponseBuilder(true, "Welcome to Service", time.Now().Format(time.RFC3339), nil))
 	})
 
 	api := app.Group(os.Getenv("API_ROUTE_VERSION"))
