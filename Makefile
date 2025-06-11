@@ -7,7 +7,11 @@ all: lint test run
 
 test:
 	@echo "🔍 Running unit tests..."
-	@richgo test -v ./test/...
+	@if [ -n "$(svc)" ]; then \
+		richgo test -v ./test/unit/service/$(svc)_service_test.go; \
+	else \
+		richgo test -v ./test/...; \
+	fi
 
 lint:
 	@echo "🧹 Running linter..."
@@ -24,15 +28,6 @@ gen-service:
 
 remove-service:
 	go run tools/remove/remove_service.go --name $(name)
-
-gen-mock:
-	@echo "🔧 Generating mock for repository: $(reponame)"
-	@mockgen \
-		-destination=./test/mocks/repository/$(shell echo $(reponame) | tr 'A-Z' 'a-z' | sed 's/repository/_mock/')".go" \
-		-package=repository \
-		$(shell grep ^module go.mod | awk '{print $$2}')/internal/repository \
-		$(reponame)
-	@echo "✅ Mock generated for $(reponame)"
 
 
 gen-test:

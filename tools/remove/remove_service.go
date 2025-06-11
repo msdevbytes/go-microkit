@@ -215,7 +215,13 @@ func removeFromHistory(name string) {
 	history := map[string]interface{}{}
 
 	data, _ := os.ReadFile(historyFile)
-	json.Unmarshal(data, &history)
+	err := json.Unmarshal(data, &history)
+	if err != nil {
+		fmt.Println("❌ Failed to read history:", err)
+		return
+	}
+	// Remove the entry for the specified name
+	// Use strings.ToLower to ensure case-insensitive removal
 
 	delete(history, strings.ToLower(name))
 
